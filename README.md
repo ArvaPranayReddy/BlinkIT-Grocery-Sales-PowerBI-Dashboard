@@ -1,97 +1,268 @@
-# 🛒 BlinkIT Grocery Sales — Power BI Dashboard
+# 🛒 Blinkit Sales Analysis — Power BI Dashboard
 
-An interactive Power BI dashboard analyzing **BlinkIT's grocery sales data** across outlet types, item categories, fat content, and location tiers — built to uncover sales trends and performance insights.
+![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen?style=for-the-badge)
+![Domain](https://img.shields.io/badge/Domain-Retail%20Analytics-orange?style=for-the-badge)
 
----
-
-## 📸 Dashboard Preview
-
-> **Page 1 — Sales Overview, Detailed Analysis**
-
-![Dashboard Preview](screenshots/page1_dashboard.png)
-
-
+A comprehensive end-to-end Power BI project analyzing **Blinkit's sales performance, customer satisfaction, and inventory distribution** across outlet types, locations, and item categories.
 
 ---
 
-## 📊 Key KPIs
+## 📌 Table of Contents
 
-| Metric | Value |
+- [Project Overview](#-project-overview)
+- [Business Requirements & KPIs](#-business-requirements--kpis)
+- [Dataset Description](#-dataset-description)
+- [Project Workflow](#-project-workflow)
+- [Data Cleaning Steps](#-data-cleaning-steps-power-query-editor)
+- [DAX Measures](#-dax-measures)
+- [Dashboard Visualizations](#-dashboard-visualizations)
+- [Key Findings & Insights](#-key-findings--insights)
+- [Dashboard Preview](#-dashboard-preview)
+- [How to Use](#-how-to-use)
+
+---
+
+## 📋 Project Overview
+
+| Field | Detail |
 |---|---|
-| 💰 Total Sales | ₹2,19,870.65 |
-| 📦 No. of Items | 2K |
-| 📈 Avg Sales | ₹141.03 |
-| ⭐ Avg Rating | 4.35 |
+| **Tool** | Microsoft Power BI Desktop |
+| **Dataset** | Blinkit Grocery Data |
+| **Domain** | Retail / Quick Commerce |
+| **Objective** | Analyze sales performance, customer satisfaction, and inventory distribution to surface actionable business insights |
 
 ---
 
-## 🔍 Dashboard Features
+## 🎯 Business Requirements & KPIs
 
-### Visuals Included
-- **KPI Cards** — Total Sales, Avg Sales, No. of Items, Avg Rating
-- **Donut Chart** — Fat Content split (Low Fat vs Regular)
-- **Line Chart** — Total Sales trend over time
-- **Bar Chart** — Sales by Item Type (16 categories)
-- **Pie Chart** — Total Sales by Outlet Size
-- **Stacked Bar Chart** — Item Fat Content by Outlet Location Tier
-- **Bar Chart** — Total Sales by Outlet Location Type (Tier 1/2/3)
-- **Table** — Outlet Type breakdown with Total Sales, Avg Sales, No. of Items
+### Project Objective
+Conduct a comprehensive analysis of Blinkit's sales performance, customer satisfaction, and inventory distribution to identify key insights using Power BI dashboards.
 
-### Interactive Filters (Slicers)
-- 📍 Outlet Location Type (All / Tier 1 / Tier 2 / Tier 3)
-- 🥗 Item Fat Content (All / Low Fat / Regular)
-- 🛍️ Item Type (All categories)
+### Key Performance Indicators (KPIs)
+
+| KPI | Description | Dashboard Value |
+|---|---|---|
+| **Total Sales** | Overall revenue generated from all items sold | ₹219.87K |
+| **Average Sales** | Average revenue per transaction | ₹141.03 |
+| **Number of Items Sold** | Total count of distinct items sold | 2,000 |
+| **Average Rating** | Average customer rating across all items | 4.0 |
 
 ---
 
-## 🗄️ Dataset Overview
+## 📂 Dataset Description
+
+The dataset contains grocery sales records from Blinkit outlets across India.
 
 | Column | Description |
 |---|---|
-| `Item Identifier` | Unique ID for each item |
-| `Item Type` | Category (Snack Foods, Fruits, Dairy, etc.) |
+| `Item Identifier` | Unique product ID |
+| `Item Type` | Category (Snacks, Fruits, Household, etc.) |
 | `Item Fat Content` | Low Fat / Regular |
-| `Item Visibility` | Shelf visibility score |
-| `Item Weight` | Weight of item |
-| `Sales` | Sales amount |
-| `Rating` | Customer rating |
+| `Item Weight` | Weight of product |
+| `Item Visibility` | Display visibility score |
+| `Item MRP` | Maximum Retail Price |
 | `Outlet Identifier` | Unique outlet ID |
-| `Outlet Type` | Grocery Store / Supermarket Type 1/2/3 |
+| `Outlet Establishment Year` | Year the outlet was established |
 | `Outlet Size` | Small / Medium / High |
 | `Outlet Location Type` | Tier 1 / Tier 2 / Tier 3 |
-| `Outlet Establishment` | Year outlet was established |
-| `Total Sales` | Aggregated sales measure |
+| `Outlet Type` | Grocery Store / Supermarket Type 1/2/3 |
+| `Item Outlet Sales` | Target variable — actual sales |
 
 ---
 
-## 💡 Key Insights
+## 🔄 Project Workflow
 
-- **Supermarket Type 1** drives the highest total sales at ₹1,48,052.37 with 3,264 items
-- **Medium-sized outlets** dominate with 42.55% of total sales
-- **Tier 3 locations** lead in outlet location sales at ₹78.16K
-- **Snack Foods and Fruits & Vegetables** are the top-selling item types (~32K each)
-- **Low Fat items** make up 64.7% of all sales
-- **Regular fat items** account for 35.25% of sales
-
----
-
-## 🛠️ Tools Used
-
-| Tool | Purpose |
-|---|---|
-| Power BI Desktop | Dashboard design and visualization |
-| Power Query | Data cleaning and transformation |
-| DAX | Calculated measures (Total Sales, Avg Sales, Avg Rating) |
-
----
-
+```
+01 Requirement Gathering  →  02 Data Walkthrough  →  03 Data Connection
+         ↓
+04 Data Cleaning  →  05 Data Modeling  →  06 DAX Calculations
+         ↓
+07 Dashboard Design  →  08 Chart Development  →  09 Report Development
+         ↓
+              10 Insights Generation
 ```
 
 ---
 
-## 👨‍💻 About
+## 🧹 Data Cleaning Steps (Power Query Editor)
 
-Project by **PranayReddyArva**  
-Part of a data analytics portfolio showcasing Power BI skills.
+All transformations were performed inside **Power Query Editor** before loading data into the model.
 
-🔗 Also check out: [Hantavirus Global Surveillance SQL Project](https://github.com/ArvaPranayReddy/Hantavirus-Global-Surveillance-2026-SQL-Project)
+### Step 1 — Promoted Headers
+- Ensured the first row was correctly promoted as column headers.
+
+### Step 2 — Data Type Corrections
+```
+Item Weight          → Decimal Number
+Item MRP             → Decimal Number
+Item Outlet Sales    → Decimal Number
+Outlet Establishment Year → Whole Number
+Item Visibility      → Decimal Number
+```
+
+### Step 3 — Fat Content Standardization ⚠️ (Critical Fix)
+The `Item Fat Content` column had **inconsistent values** representing the same categories:
+
+| Raw Values Found | Standardized To |
+|---|---|
+| `LF`, `low fat` | `Low Fat` |
+| `reg` | `Regular` |
+
+**Power Query M Code used:**
+```m
+= Table.ReplaceValue(
+    Table.ReplaceValue(#"Previous Step",
+        "LF", "Low Fat", Replacer.ReplaceValue, {"Item Fat Content"}),
+    "reg", "Regular", Replacer.ReplaceValue, {"Item Fat Content"})
+```
+
+> Without this fix, the Fat Content donut chart would have shown 4–5 slices instead of 2, making analysis misleading.
+
+### Step 4 — Null Value Handling
+- `Item Weight`: Checked for nulls — retained rows since weight was not used as a primary dimension in any KPI calculation.
+- `Outlet Size`: No nulls found after type correction.
+
+### Step 5 — Removed Duplicates
+- Verified no duplicate `Item Identifier` + `Outlet Identifier` combinations existed.
+
+### Step 6 — Column Profiling Check
+Used **View → Column Quality / Column Distribution / Column Profile** to validate:
+- `Item Fat Content`: Confirmed only 2 distinct values after cleaning
+- `Outlet Type`: Confirmed 4 distinct outlet types
+- `Outlet Location Type`: Confirmed exactly Tier 1, Tier 2, Tier 3
+
+---
+
+## 📐 DAX Measures
+
+All measures were created in a dedicated **`_Measures`** table for clean model organization.
+
+```dax
+-- 1. Total Sales
+Total Sales = SUM('BlinkIT Grocery Data'[Item Outlet Sales])
+
+-- 2. Average Sales
+Average Sales = AVERAGE('BlinkIT Grocery Data'[Item Outlet Sales])
+
+-- 3. Number of Items
+No of Items = COUNTROWS('BlinkIT Grocery Data')
+
+-- 4. Average Rating
+Avg Rating = AVERAGE('BlinkIT Grocery Data'[Item Rating])
+```
+
+### Dynamic KPI Card Measure (used with slicer toggle)
+```dax
+-- Switches the displayed metric based on a What-If parameter slicer
+Selected KPI =
+SWITCH(
+    SELECTEDVALUE('KPI Selector'[KPI]),
+    "Total Sales",   [Total Sales],
+    "Avg Sales",     [Average Sales],
+    "No of Items",   [No of Items],
+    "Avg Rating",    [Avg Rating],
+    [Total Sales]
+)
+```
+
+---
+
+## 📊 Dashboard Visualizations
+
+| # | Chart Title | Chart Type | Key Dimension |
+|---|---|---|---|
+| 1 | Total Sales by Fat Content | Donut Chart | Item Fat Content |
+| 2 | Total Sales by Item Type | Horizontal Bar Chart | Item Type |
+| 3 | Fat Content by Outlet for Total Sales | Stacked Bar Chart | Outlet Location × Fat Content |
+| 4 | Total Sales by Outlet Establishment Year | Line Chart | Year |
+| 5 | Sales by Outlet Size | Pie Chart | Outlet Size |
+| 6 | Sales by Outlet Location Type | Bar Chart | Tier 1 / 2 / 3 |
+| 7 | All Metrics by Outlet Type | Matrix Table | Outlet Type |
+
+### Filter Panel (Slicers)
+Three interactive slicers allow cross-filtering all visuals simultaneously:
+- **Outlet Location Type** (Tier 1 / 2 / 3)
+- **Item Type** (16 categories)
+- **Item Fat Content** (Low Fat / Regular)
+
+---
+
+## 💡 Key Findings & Insights
+
+### 1. Tier 3 Cities Outperform Tier 1 — Counterintuitive Result
+> Tier 3 cities generated **₹78.16K** in sales vs Tier 1's **₹72.36K**, despite Tier 1 typically having higher purchasing power.
+
+**Hypothesis:** Blinkit likely has more outlet density in Tier 3 cities, or Tier 3 consumers depend more heavily on quick-commerce for essential groceries due to fewer retail alternatives.
+
+---
+
+### 2. Supermarket Type 1 Dominates — 67% of Total Revenue
+> Supermarket Type 1 alone accounts for **₹1,48,052** out of ₹2,19,870 total sales (~67%).
+
+**Implication:** This outlet type is the core revenue engine. Any operational issues (stockouts, delivery delays) at Type 1 supermarkets would disproportionately impact overall revenue.
+
+---
+
+### 3. Medium Outlets Beat High-Capacity Outlets
+> Medium-sized outlets hold **42.55%** of total sales vs High outlets at 37.01%.
+
+**Implication:** Scale is not directly correlated with revenue here. Medium outlets may benefit from better location placement or optimized SKU selection. This warrants an outlet-level profitability analysis.
+
+---
+
+### 4. Snack Foods & Fruits Tied at ₹32K Despite Very Different Logistics
+> Both categories generate equal revenue, but Fruits are perishable and require cold chain management.
+
+**Implication:** Fruits delivering equivalent revenue to shelf-stable Snacks suggests Blinkit's quick-delivery model effectively neutralizes perishability risk — a genuine operational strength.
+
+---
+
+### 5. Sales Peak Around 2011–2012, Then Flatten
+> The outlet establishment line chart shows a spike in 2011–2012 followed by a sharp decline, then gradual recovery.
+
+**Context:** This aligns with Grofers' (now Blinkit) early rapid expansion phase, followed by a contraction as the business rationalized underperforming outlets before its pivot to quick commerce (10-minute delivery) model post-2020.
+
+---
+
+### 6. Average Rating Variance is Near-Zero Across All Outlet Types
+> Ratings range only from **3.9 to 4.1** across all outlet types — a suspiciously flat distribution.
+
+**Caution flag:** This low variance may indicate the rating data is synthetic or averaged at an aggregated level, which would make it unreliable as a customer satisfaction signal. In a real business context, this KPI would need validation against raw review-level data.
+
+---
+
+### 7. Regular Fat Content Outsells Low Fat (64.75% vs 35.25%)
+> Despite health-consciousness trends, Regular fat products account for nearly two-thirds of sales.
+
+**Implication:** Blinkit's customer base is primarily buying for convenience and taste, not health optimization. Marketing strategies pushing "healthy" SKUs would need behavioral nudges, not just catalog expansion.
+
+---
+
+## 🖼️ Dashboard Preview
+
+![Blinkit Power BI Dashboard](./dashboard_screenshot.png)
+
+> *Interactive dashboard with slicers for Outlet Location Type, Item Type, and Fat Content*
+
+---
+
+
+
+---
+
+## 🛠️ Tools & Technologies
+
+| Tool | Purpose |
+|---|---|
+| Power BI Desktop | Dashboard development & visualization |
+| Power Query Editor | Data cleaning & transformation |
+| DAX | Calculated measures & KPIs |
+| Excel (.xlsx) | Source data format |
+
+---
+
+
+*Project built as part of a data analytics portfolio. Dataset used is publicly available for educational purposes.*
+
+Project by Pranay Reddy Arva
